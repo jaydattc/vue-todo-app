@@ -2,7 +2,7 @@
   <div id="app" class="center">
     <div class="card">
       <div class="header center">
-        <h2>ToDo App</h2>
+        <h2>Todo App</h2>
       </div>
 
       <input
@@ -36,17 +36,16 @@ export default {
   data() {
     return {
       newTodo: "",
-      editMode: false,
       todos: [
         {
           id: idinit++,
           text: "something",
-          done: false
+          editMode: false
         },
         {
           id: idinit++,
           text: "something more",
-          done: false
+          editMode: false
         }
       ]
     };
@@ -61,18 +60,11 @@ export default {
     addTodo: function() {
       var trimmed = this.newTodo.trim();
       if (trimmed)
-        this.todos.push({ id: idinit++, text: trimmed, done: false });
+        this.todos.unshift({ id: idinit++, text: trimmed, editMode: false });
       this.newTodo = "";
     },
 
     completed: function(id) {
-      // this.todos = this.todos.map(td => {
-      //   if( td.id === id) {
-      //     td.done = !td.done;
-      //     console.log(td);
-      //   }
-      //   return td;
-      // })
       console.log(id);
       this.todos = this.todos.filter(todo => {
         return todo.id != id;
@@ -105,6 +97,53 @@ body {
   align-items: center;
 }
 
+.todo {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  p {
+    flex: 1;
+  }
+}
+.edit {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 6px;
+    background: bisque;
+    border: 2px solid cadetblue;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid cadetblue;
+      background: rgb(253, 241, 226);
+    }
+  }
+}
+
+button {
+  font-size: 1.2rem;
+  background-color: transparent;
+  border: 0;
+  height: 60%;
+  transition: all 0.3s ease-in-out;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    opacity: 0.6;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+  }
+}
+
 .card {
   width: 400px;
   min-height: 80vh;
@@ -112,7 +151,7 @@ body {
   border-radius: 5px;
   background-color: bisque;
   padding: 10px;
-  transition: all 0.3s linear;
+  transition: all 0.3s ease-in-out;
   filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.2));
 
   .header {
@@ -131,12 +170,15 @@ body {
     box-sizing: border-box;
     width: 100%;
     padding: 6px;
-    background: transparent;
-    border: 0px;
-    border-bottom: 2px solid cadetblue;
+    background: bisque;
+    border: 2px solid cadetblue;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
 
-    :focus {
-      border: 2px cadetblue;
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid cadetblue;
+      background: rgb(253, 241, 226);
     }
   }
 
