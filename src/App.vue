@@ -65,7 +65,6 @@ export default {
     },
 
     completed: function(id) {
-      console.log(id);
       this.todos = this.todos.filter(todo => {
         return todo.id != id;
       });
