@@ -1,3 +1,6 @@
 module.exports = {
-  presets: ["@vue/app"]
+  presets: ["@vue/app"],
+  publicPath: process.env.NODE_ENV === 'production'
+        ? '/vue-todo-app/'
+        : '/'
 };
